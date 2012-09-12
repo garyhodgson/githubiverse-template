@@ -42,7 +42,9 @@ layout: default
 
 ---
 
+**(Please note: this page shows example data for githubiverse-template. Please see the [github project](https://github.com/garyhodgson/githubiverse-template) for details)**
 
-(Please note: this page shows example data for githubiverse-template. Please see the github project for details: https://github.com/garyhodgson/githubiverse-template)
+<br />
+<br />
 
 An implementation of movement \#27 from ["501 Mechanical Movements"](http://books.google.de/books/about/507_Mechanical_Movements.html?id=CSH5UgzD8oIC&redir_esc=y) by Henry T. Brown.
