@@ -116,7 +116,7 @@
     <!-- Javascript -->
 
     <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
-    <script src="js/prettydate.js"> </script>
+    <script src="js/humane.js"> </script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="js/lightbox/lightbox.min.js"></script>
     <script src="js/thingiview/Three.js"></script>
@@ -365,8 +365,10 @@
               processDirectories('{{ page.img_dir }}', showImages);
               processDirectories('{{ page.stl_dir }}', showSTLs);
 
-              $('#updated').append("&nbsp;"+prettyDate(githubRepo.updated_at));
-              $('#created').append("&nbsp;"+prettyDate(githubRepo.created_at));
+              $('#updated').append("&nbsp;"+humaneDate(githubRepo.updated_at));
+              $('#updated').attr('title', (new Date(githubRepo.updated_at)).toLocaleString());
+              $('#created').append("&nbsp;"+humaneDate(githubRepo.created_at));
+              $('#created').attr('title', (new Date(githubRepo.created_at)).toLocaleString());
 
               {% if page.description_file %}
                 
