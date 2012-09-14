@@ -146,18 +146,18 @@
 
         var githubUser = new Gh3.User("{{page.github.user}}"),
             githubRepositories = new Gh3.Repositories(githubUser),
-            stl_file_count = 0,
-            src_file_count = 0;
+            stlFileCount = 0,
+            srcFileCount = 0;
 
-        function no_stls() {
+        function noSTLs() {
           $('#stls-section').html('No STL Files Found.');
         }
 
-        function no_sources() {
+        function noSources() {
           $('#sources-section').html('No Source Files Found.');
         }
 
-        function add_source_dir(dir, dirname){
+        function addSourceDir(dir, dirname){
           dir.fetchContents(function (err, res) {
             if(err) { throw "Error fetching contents for sources." }
 
@@ -169,16 +169,16 @@
                 
             dir.eachContent(function (content) {
               if (content.type == 'file'){
-                add_source_file(content, dirname);
+                addSourceFile(content, dirname);
               } else if (content.type == 'dir'){
-                add_source_dir(content, dirname);
+                addSourceDir(content, dirname);
               }
             });
           });
         }
 
-        function add_source_file(content,dirname){
-          src_file_count++;
+        function addSourceFile(content,dirname){
+          srcFileCount++;
           if (dirname != ''){
             dirname = dirname+'/';
           }
@@ -189,7 +189,7 @@
           $('#sourcedownloads').append("<li><a class='btn-small btn-inverse' href='" + rawFileURL + "' download='" + content.name + "'><i class='icon-download-alt icon-white'></i>&nbsp;Download</a></li>");
         }
 
-        function add_stl_dir(dir, dirname){
+        function addSTLDir(dir, dirname){
           dir.fetchContents(function (err, res) {
             if(err) { throw "Error fetching contents for stls." }
 
@@ -201,19 +201,19 @@
                 
             dir.eachContent(function (content) {
               if (content.type == 'file'){
-                add_stl_file(content, dirname);
+                addSTLFile(content, dirname);
               } else if (content.type == 'dir'){
-                add_stl_dir(content, dirname);
+                addSTLDir(content, dirname);
               }
             });
           });
         }
 
-        function add_stl_file(content,dirname){
+        function addSTLFile(content,dirname){
           if (! /\.stl$/i.test(content.name)) {
             return
           }
-          stl_file_count++;
+          stlFileCount++;
           if (dirname != ''){
             dirname = dirname+'/';
           }
@@ -257,28 +257,28 @@
 
         function showSources(srcDir){
           if (srcDir == undefined) {
-            no_sources();
+            noSources();
             return;
           }
           srcDir.fetchContents(function (err, res) {
             if(err) { throw "Error fetching contents for sources." }
             srcDir.eachContent(function (content) {
               if (content.type == 'file'){
-                add_source_file(content, '');
+                addSourceFile(content, '');
               } else if (content.type == 'dir'){
-                add_source_dir(content, '');
+                addSourceDir(content, '');
               }
             });
 
-            if (src_file_count == 0){
-              no_sources();
+            if (srcFileCount == 0){
+              noSources();
             }
           });
         }
 
         function showSTLs(stlDir){
           if (stlDir == undefined){
-            no_stls();
+            noStls();
             return;
           } 
           stlDir.fetchContents(function (err, res) {
@@ -286,20 +286,20 @@
 
             stlDir.eachContent(function (content) {
                 if (content.type == 'file'){
-                  add_stl_file(content, '');
+                  addSTLFile(content, '');
                 } else if (content.type == 'dir'){
-                  add_stl_dir(content, '');
+                  addSTLDir(content, '');
                 }
             });
 
-            if (stl_file_count > 0){
+            if (stlFileCount > 0){
               if (autoloadSTL && $('.stlfile').first().text() != "") {
                 if ($('.stlfile').first().data('githubFile') != undefined){
                   loadStlString($('.stlfile').first().data('githubFile'));  
                 }                      
               }  
             } else {
-              no_stls();
+              noStls();
             }
           });
         }
@@ -373,6 +373,7 @@
               {% if page.description_file %}
                 
                 var descriptionFile = master.getFileByName('{{page.description_file}}');
+
                 descriptionFile.fetchContent(function (err, res) {
                   if(err) { throw "Error retrieving github description file." }
 
