@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Githubiverse: {{ page.title }} by {{ page.author }}</title>
+    <title>Githubiverse: {{ site.githubiverse.title }} by {{ site.githubiverse.author }}</title>
 
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     
@@ -11,8 +11,8 @@
 
   </head>
   <body>
-    {% if page.show_forkme_ribbon %}
-      <a href="{{page.github.base}}{{page.github.user}}/{{page.github.repository}}"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    {% if site.githubiverse.show_forkme_ribbon %}
+      <a href="{{site.githubiverse.github.base}}{{site.githubiverse.github.user}}/{{site.githubiverse.github.repository}}"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     {% endif %}
 
     <div class="container">
@@ -22,7 +22,7 @@
           {% include header.html %}
 
           <div class="page-header">
-            <h1 id="title">{{ page.title }}<small> by {{ page.author }}</small></h1>
+            <h1 id="title">{{ site.githubiverse.title }}<small> by {{ site.githubiverse.author }}</small></h1>
           </div>
           
           <div class="row-fluid">
@@ -57,7 +57,7 @@
                 <div class="span12">
                   <div id="tags">
                     <i class="icon-tags" title="tags"></i>&nbsp;
-                    {% for tag in page.tags %}
+                    {% for tag in site.githubiverse.tags %}
                       <a href="#" class="tag"><span class="label">{{ tag }}</span></a>
                     {% endfor %}
                   </div>
@@ -66,20 +66,20 @@
 
               <div class="meta row-fluid">
                 <div class="span6">
-                  <div id="home"><i class='icon-home' title="Repository"></i>&nbsp;<a href="{{ page.github.base }}{{ page.github.repository }}">{{ page.github.repository }}</a></div>
+                  <div id="home"><i class='icon-home' title="Repository"></i>&nbsp;<a href="{{ site.githubiverse.github.base }}{{ site.githubiverse.github.repository }}">{{ site.githubiverse.github.repository }}</a></div>
                 </div>
 
                 <div class="span6">
-                  <div id="author"><i class='icon-user' title="User"></i>&nbsp;<a href="{{ page.github.base }}{{ page.github.user }}">{{ page.github.user }}</a></div>
+                  <div id="author"><i class='icon-user' title="User"></i>&nbsp;<a href="{{ site.githubiverse.github.base }}{{ site.githubiverse.github.user }}">{{ site.githubiverse.github.user }}</a></div>
                 </div>
               </div>
 
               <div class="meta row-fluid">
                 <div class="span6">
-                  <div id="license"><i class='icon-file' title="License"></i>&nbsp;{{ page.license }}</div>
+                  <div id="license"><i class='icon-file' title="License"></i>&nbsp;{{ site.githubiverse.license }}</div>
                 </div>
                 <div class="span6">
-                  <div id="download-all"><i class='icon-download' title="Download Project"></i>&nbsp;<a href="{{ page.github.base }}{{ page.github.user }}/{{ page.github.repository }}/zipball/{{ page.github.branch }}">Download Project as Zip</a></div>
+                  <div id="download-all"><i class='icon-download' title="Download Project"></i>&nbsp;<a href="{{ site.githubiverse.github.base }}{{ site.githubiverse.github.user }}/{{ site.githubiverse.github.repository }}/zipball/{{ site.githubiverse.github.branch }}">Download Project as Zip</a></div>
                 </div>
               </div>
 
@@ -131,9 +131,9 @@
 
     <script>
       $(document).ready(function(){
-        autoloadSTL = {{ page.autoload_stl }};
-        leadImageName = '{{ page.lead_image }}';
-        showLeadImage = {{ page.show_lead_image }};
+        autoloadSTL = {{ site.githubiverse.autoload_stl }};
+        leadImageName = '{{ site.githubiverse.lead_image }}';
+        showLeadImage = {{ site.githubiverse.show_lead_image }};
         thingiurlbase = "js/thingiview";
         thingiview = new Thingiview("stlviewer");
         thingiview.setObjectColor('#C0D8F0');
@@ -144,7 +144,7 @@
           loadStlString($(this).data('githubFile'));
         });
 
-        var githubUser = new Gh3.User("{{page.github.user}}"),
+        var githubUser = new Gh3.User("{{site.githubiverse.github.user}}"),
             githubRepositories = new Gh3.Repositories(githubUser),
             stlFileCount = 0,
             srcFileCount = 0;
@@ -349,30 +349,30 @@
           if(err) { throw "Error fetching github repositories." }
         });
 
-        githubRepo = new Gh3.Repository("{{page.github.repository}}", githubUser);
+        githubRepo = new Gh3.Repository("{{site.githubiverse.github.repository}}", githubUser);
         githubRepo.fetch(function (err, res) {
           if(err) { throw "Error fetching github repository." }
 
           githubRepo.fetchBranches(function (err, res) {
             if(err) { throw "Error fetching github branches." }
 
-            master = githubRepo.getBranchByName("{{page.github.branch}}");
+            master = githubRepo.getBranchByName("{{site.githubiverse.github.branch}}");
 
             master.fetchContents(function (err, res) {
               if(err) { throw "Error fetching github repository contents." }
 
-              processDirectories('{{ page.src_dir }}', showSources);
-              processDirectories('{{ page.img_dir }}', showImages);
-              processDirectories('{{ page.stl_dir }}', showSTLs);
+              processDirectories('{{ site.githubiverse.src_dir }}', showSources);
+              processDirectories('{{ site.githubiverse.img_dir }}', showImages);
+              processDirectories('{{ site.githubiverse.stl_dir }}', showSTLs);
 
               $('#updated').append("&nbsp;"+humaneDate(githubRepo.updated_at));
               $('#updated').attr('title', (new Date(githubRepo.updated_at)).toLocaleString());
               $('#created').append("&nbsp;"+humaneDate(githubRepo.created_at));
               $('#created').attr('title', (new Date(githubRepo.created_at)).toLocaleString());
 
-              {% if page.description_file %}
+              {% if site.githubiverse.description_file %}
                 
-                var descriptionFile = master.getFileByName('{{page.description_file}}');
+                var descriptionFile = master.getFileByName('{{site.githubiverse.description_file}}');
 
                 descriptionFile.fetchContent(function (err, res) {
                   if(err) { throw "Error retrieving github description file." }
