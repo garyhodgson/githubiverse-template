@@ -1,0 +1,39 @@
+## githubiverse-template by Gary Hodgson
+## license: GPL3
+##
+## The data below is left as an example.  Please change each entry to match your requirements. 
+## 
+
+## Uses distinct namespace. Jekyll settings should go at the root level.
+githubiverse:
+    ## Metadata
+    title: "Mechanical Movement #27"
+    author: Gary Hodgson
+    license: GPL3
+    tags: [mechanical movement, fun]
+
+    ## Github project parameters.
+    github:
+        base: https://github.com/
+        user: garyhodgson
+        repository: githubiverse-tst
+        branch: master
+
+    ## The names of directories where any images, source and stl files associated with the project can be found.
+    img_dir: img
+    stl_dir: stl
+    src_dir: src
+
+    ## The headline image
+    lead_image: test-jig.jpg
+    show_lead_image: true
+
+    ## Optional. When uncommented appends the content of the file defined here to the project description.  Any text in index.md, after the yaml header, will be shown first.
+    ## WARNING: since the github outage on 12th Sep. this feature does not currently work.
+    #description_file: readme.md
+
+    ## Preview the first STL in the list when the page loads.
+    autoload_stl: true
+
+    ## Show a github "fork me" ribbon in the top righthand corner of the page.
+    show_forkme_ribbon: true
