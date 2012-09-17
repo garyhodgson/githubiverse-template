@@ -30,7 +30,7 @@ githubiverse:
 
     ## Optional. When uncommented appends the content of the file defined here to the project description.  Any text in index.md, after the yaml header, will be shown first.
     ## WARNING: since the github outage on 12th Sep. this feature does not currently work.
-    #description_file: readme.md
+    description_file: README.md
 
     ## Preview the first STL in the list when the page loads.
     autoload_stl: true

@@ -116,7 +116,8 @@
     <!-- Javascript -->
 
     <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
-    <script src="js/humane.js"> </script>
+    <script src="js/humane.min.js"></script>
+    <script src="js/showdown.min.js"></script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="js/lightbox/lightbox.min.js"></script>
     <script src="js/thingiview/Three.js"></script>
@@ -377,11 +378,19 @@
                 descriptionFile.fetchContent(function (err, res) {
                   if(err) { throw "Error retrieving github description file." }
 
-                  if ($('#description').html().trim() == ''){
-                    $('#description').html(descriptionFile.getRawContent().replace(/\n/g,'<br>'));  
+                  var descriptionText = "";
+
+                  if ((/.*\.md$/).test(descriptionFile.name) || (/.*\.markdown$/).test(descriptionFile.name)){
+                    var converter = new Showdown.converter();
+                    descriptionText = converter.makeHtml(descriptionFile.getRawContent());  
                   } else {
-                    var descriptionText = $('#description').html() + "<br>"  + descriptionFile.getRawContent().replace(/\n/g,'<br>');
-                    $('#description').html(descriptionText);
+                    descriptionText = descriptionFile.getRawContent();
+                  }                  
+
+                  if ($('#description').html().trim() == ''){
+                    $('#description').html(descriptionText);  
+                  } else {
+                    $('#description').html($('#description').html() + "<br>"  + descriptionText);
                   }
                   
                   
