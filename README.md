@@ -16,15 +16,6 @@ Instructions
 * Test locally with jekyll, or commit and push to github.
 * When pushed, view at http://yourusername.github.com/yourprojectname, an example project can be seen here: http://garyhodgson.github.com/githubiverse-tst
 
-
-Alternative Method
-------------------
-
-* Follow the instructions above but instead of copying the contents of githubiverse-template, create a submodule for the gh-pages branch into a folder called, for example, template.  I.e. `git submodule add -b gh-pages git://github.com/garyhodgson/githubiverse-template.git template`  Make sure to use the git read-only url syntax, i.e. git://...
-* Copy the _config.yml file from the template folder to the root folder and add the following at the top: `source: template`
-
-This has the benefit that the submodule can be updated without having to copy the new files in each time.  One could fork githubiverse-template, edit it to your taste, and then use it as a submodule in all your 3D printing projects.  Updating the shared template would mean only having to update the submodule in each project.
-
 License
 -------
 GPL3
