@@ -122,7 +122,8 @@
     <script src="js/lightbox/lightbox.min.js"></script>
     <script src="js/thingiview/Three.js"></script>
     <script src="js/thingiview/plane.js"></script>
-    <script src="js/thingiview/thingiview.min.js"></script>
+    <script src="js/thingiview/Base64Binary.js"></script>
+    <script src="js/thingiview/thingiview.js"></script>
     <script src="js/underscore/underscore.min.js"></script>
     <script src="js/github/gh3.min.js"></script>
     
@@ -210,6 +211,7 @@
           });
         }
 
+
         function addSTLFile(content,dirname){
           if (! /\.stl$/i.test(content.name)) {
             return
@@ -233,7 +235,15 @@
           githubFile.fetchContent(function (err, res) {
             if(err) { throw "Error retrieving github file contents." }
 
-            thingiview.loadSTLString(githubFile.getRawContent());
+            var stlString = githubFile.getRawContent();
+
+            if (stlString.match(/^solid/)){
+              thingiview.loadSTLString(stlString);
+            } else {
+              var uintArray = Base64Binary.decode(githubFile.content);
+              thingiview.loadSTLBinary(String.fromCharCode.apply(null, new Uint16Array(uintArray)));
+            }
+            
           });
         }
 

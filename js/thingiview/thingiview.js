@@ -42,7 +42,7 @@ Thingiview = function(containerId) {
   var rotateListener = null;
   var wasRotating    = null;
 
-  var cameraView = 'diagonal';
+  var cameraView = 'iso';
   var cameraZoom = 0;
   var rotate = false;
   var backgroundColor = '#606060';
@@ -456,6 +456,12 @@ Thingiview = function(containerId) {
       if (showPlane) {
         plane.flipSided = true;
       }
+    } else if (dir == 'iso') {
+      targetXRotation = 45;
+      targetYRotation = 0;
+      if (showPlane) {
+        plane.flipSided = true;
+      }
     } else {
       // camera.position.y = -70;
       // camera.position.z = 70;
@@ -585,7 +591,7 @@ Thingiview = function(containerId) {
       // zoom backwards about half that distance, I don't think I'm doing the math or backwards vector calculation correctly?
       // scope.setCameraZoom(-distance/1.8);
       // scope.setCameraZoom(-distance/1.5);
-      scope.setCameraZoom(-distance/1.9);
+      scope.setCameraZoom(-distance/0.9);
 
       directionalLight.position.x = geometry.min_y * 2;
       directionalLight.position.y = geometry.min_y * 2;
@@ -634,6 +640,7 @@ Thingiview = function(containerId) {
         scope.setRotation(false);
         //scope.setRotation(true);
         log("finished loading " + geometry.faces.length + " faces.");
+        thingiview.setCameraView(cameraView);
         scope.centerCamera();
       } else if (event.data.status == "complete_points") {
         progressBar.innerHTML = 'Initializing points...';
