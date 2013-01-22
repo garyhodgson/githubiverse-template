@@ -377,8 +377,8 @@
               processDirectories('{{ site.githubiverse.img_dir }}', showImages);
               processDirectories('{{ site.githubiverse.stl_dir }}', showSTLs);
 
-              $('#updated').append("&nbsp;"+humaneDate(githubRepo.updated_at));
-              $('#updated').attr('title', (new Date(githubRepo.updated_at)).toLocaleString());
+              $('#updated').append("&nbsp;"+humaneDate(githubRepo.pushed_at));
+              $('#updated').attr('title', (new Date(githubRepo.pushed_at)).toLocaleString());
               $('#created').append("&nbsp;"+humaneDate(githubRepo.created_at));
               $('#created').attr('title', (new Date(githubRepo.created_at)).toLocaleString());
 
