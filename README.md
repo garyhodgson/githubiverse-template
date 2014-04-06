@@ -1,6 +1,8 @@
 githubiverse-template
 ============
 
+Note: There is a major limitation to this template due to Github's API rate limit, see issue #5 for details.
+
 This is a Github Page template to show off your 3D printer model or project.  Inspiration clearly taken from the excellent Thingiverse.
 
 Instructions
