@@ -1,7 +1,7 @@
 githubiverse-template
 ============
 
-**Note: There is a major limitation to this template due to Github's API rate limit, see [issue #5](https://github.com/garyhodgson/githubiverse-template/issues/5) for details.''
+**Note: There is a major limitation to this template due to Github's API rate limit, see [issue #5](https://github.com/garyhodgson/githubiverse-template/issues/5) for details.**
 
 **Also, I consider the [thing-tracker-site-template](https://github.com/garyhodgson/thing-tracker-site-template) to be a successor to this project. Have a look at [this blog post](http://garyhodgson.com/reprap/2014/06/thing-tracker-site-template/) for more details.**
 
